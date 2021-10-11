@@ -1,32 +1,26 @@
 package com.evertonnrb.mc1.resources;
 
 import com.evertonnrb.mc1.domain.Categoria;
+import com.evertonnrb.mc1.service.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Categoria> oi(){
+    @Autowired
+    private CategoriaService service;
 
-        Categoria info = new Categoria(1,"Informatica");
-        Categoria lim = new Categoria(2,"Limpeza");
-        Categoria escritorio = new Categoria(3,"Escritorio");
-        Categoria promo = new Categoria(4,"Producao");
-        Categoria geren= new Categoria(5,"Gerencia");
-
-        List<Categoria> categorias = new ArrayList<>();
-        categorias.add(info);
-        categorias.add(lim);
-        categorias.add(escritorio);
-        categorias.add(promo);
-        categorias.add(geren);
-        return categorias;
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public ResponseEntity<?> buscarPorId(@PathVariable Integer id){
+        Optional<Categoria> obj = service.buscar(id);
+        return ResponseEntity.ok().body(obj);
     }
 }
