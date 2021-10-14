@@ -2,14 +2,12 @@ package com.evertonnrb.mc1.resources;
 
 import com.evertonnrb.mc1.domain.Categoria;
 import com.evertonnrb.mc1.service.CategoriaService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -20,7 +18,7 @@ public class CategoriaResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
-        Categoria obj = service.buscar(id);
+        Categoria obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
@@ -32,5 +30,12 @@ public class CategoriaResource {
                 .path("/id")
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+        obj.setId(id);
+        service.update(obj);
+        return ResponseEntity.noContent().build();
     }
 }
