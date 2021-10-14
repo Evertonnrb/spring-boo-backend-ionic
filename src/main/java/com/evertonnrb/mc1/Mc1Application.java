@@ -42,6 +42,14 @@ public class Mc1Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Categoria cat1 = new Categoria(null,"Escritório");
         Categoria cat2 = new Categoria(null,"Contabilidade");
+        Categoria cat3 = new Categoria(null,"Cama mesa e banho");
+        Categoria cat4 = new Categoria(null,"Eletronicos");
+        Categoria cat5 = new Categoria(null,"Pisos e revestimentos");
+        Categoria cat6 = new Categoria(null,"Tinta e texturas");
+        Categoria cat7 = new Categoria(null,"Berçario");
+        Categoria cat8 = new Categoria(null,"Administrativo");
+        Categoria cat9 = new Categoria(null,"Padaria");
+        Categoria cat10 = new Categoria(null,"Restaurante");
 
         Produto p1 = new Produto(null,"Computador",2000.00);
         Produto p2 = new Produto(null,"Impressora",1800.00);
@@ -104,7 +112,7 @@ public class Mc1Application implements CommandLineRunner {
         p2.getItens().addAll(Arrays.asList(itemPedido3));
         p3.getItens().addAll(Arrays.asList(itemPedido2));
 
-        categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+        categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7,cat8,cat9,cat10));
         produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 
         estadoRepository.saveAll(Arrays.asList(rj,sp,ms));

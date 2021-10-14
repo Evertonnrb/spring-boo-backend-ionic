@@ -6,6 +6,9 @@ import com.evertonnrb.mc1.service.exceptions.DataIntegrityException;
 import com.evertonnrb.mc1.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,15 +40,20 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         find(id);
-        try{
+        try {
             repository.deleteById(id);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possivel excluir ");
         }
 
     }
 
     public List<Categoria> findAll() {
-       return repository.findAll();
+        return repository.findAll();
+    }
+
+    public Page<Categoria> findByPage(Integer page,Integer linesPerPage, String orderBy,String direction){
+        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
+        return repository.findAll(pageRequest);
     }
 }
