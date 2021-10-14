@@ -1,6 +1,7 @@
 package com.evertonnrb.mc1;
 
 import com.evertonnrb.mc1.domain.*;
+import com.evertonnrb.mc1.domain.enuns.EstadoPagamento;
 import com.evertonnrb.mc1.domain.enuns.TipoCliente;
 import com.evertonnrb.mc1.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -25,6 +27,10 @@ public class Mc1Application implements CommandLineRunner {
     private ClienteRepository clienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Mc1Application.class, args);
@@ -72,6 +78,19 @@ public class Mc1Application implements CommandLineRunner {
 
         maria.getEnderecos().addAll(Arrays.asList(endereco1,endereco2));
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        Pedido pedido1 = new Pedido(null,sdf.parse("30/09/2017 10:32"),maria,endereco1 );
+        Pedido pedido2 = new Pedido(null,sdf.parse("10/02/2018 00:01"),maria,endereco2 );
+
+        Pagamento pagamento1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO,pedido1,3);
+        pedido1.setPagamento(pagamento1);
+
+        Pagamento pagamento2 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE,pedido2,sdf.parse("10/01/2018 00:00"),null);
+        pedido2.setPagamento(pagamento2);
+
+        maria.getPedidos().addAll(Arrays.asList(pedido1,pedido2));
+
         categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
         produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 
@@ -81,5 +100,9 @@ public class Mc1Application implements CommandLineRunner {
         clienteRepository.save(maria);
 
         enderecoRepository.saveAll(Arrays.asList(endereco1,endereco2));
+
+
+        pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
+        pagamentoRepository.saveAll(Arrays.asList(pagamento1,pagamento2));
     }
 }
