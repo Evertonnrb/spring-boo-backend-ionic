@@ -21,4 +21,9 @@ public class CategoriaService {
                         "Recurso não encontrado id " + id + " tipo " + Categoria.class.getName()
                 ));
     }
+
+    public Categoria insert(Categoria categoria){
+        categoria.setId(null);
+        return repository.save(categoria);
+    }
 }
