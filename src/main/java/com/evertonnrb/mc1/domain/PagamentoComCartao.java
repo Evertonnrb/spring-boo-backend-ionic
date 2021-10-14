@@ -5,11 +5,12 @@ import com.evertonnrb.mc1.domain.enuns.EstadoPagamento;
 import javax.persistence.Entity;
 
 @Entity
-public class PagamentoComCartao extends Pagamento{
+public class PagamentoComCartao extends Pagamento {
 
     private Integer numeroDeParcelas;
 
-    public PagamentoComCartao(){}
+    public PagamentoComCartao() {
+    }
 
     public PagamentoComCartao(Integer id, EstadoPagamento pagamento, Pedido pedido, Integer numeroDeParcelas) {
         super(id, pagamento, pedido);

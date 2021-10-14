@@ -1,6 +1,5 @@
 package com.evertonnrb.mc1.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -10,12 +9,15 @@ import java.util.*;
 @Entity
 public class Produto implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
+
     private Double preco;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "PRODUTO_CATEGORIA",
@@ -28,7 +30,8 @@ public class Produto implements Serializable {
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
-    public Produto(){}
+    public Produto() {
+    }
 
     public Produto(Integer id, String nome, Double preco) {
         this.id = id;
@@ -37,9 +40,9 @@ public class Produto implements Serializable {
     }
 
     @JsonIgnore
-    public List<Pedido> getPedidos(){
+    public List<Pedido> getPedidos() {
         List<Pedido> lista = new ArrayList<>();
-        for(ItemPedido x : itens){
+        for (ItemPedido x : itens) {
             lista.add(x.getPedido());
         }
         return lista;

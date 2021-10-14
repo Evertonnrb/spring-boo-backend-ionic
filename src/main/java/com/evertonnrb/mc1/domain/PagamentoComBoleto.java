@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
-public class PagamentoComBoleto extends Pagamento{
+public class PagamentoComBoleto extends Pagamento {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataVencimento;
