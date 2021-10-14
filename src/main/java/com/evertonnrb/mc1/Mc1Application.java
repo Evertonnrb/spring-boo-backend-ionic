@@ -31,6 +31,8 @@ public class Mc1Application implements CommandLineRunner {
     private PedidoRepository pedidoRepository;
     @Autowired
     private PagamentoRepository pagamentoRepository;
+    @Autowired
+    private  ItemPedidoRespository itemPedidoRespository;
 
     public static void main(String[] args) {
         SpringApplication.run(Mc1Application.class, args);
@@ -91,6 +93,17 @@ public class Mc1Application implements CommandLineRunner {
 
         maria.getPedidos().addAll(Arrays.asList(pedido1,pedido2));
 
+        ItemPedido itemPedido1 = new ItemPedido(pedido1,p1,0.00,1,2000.00);
+        ItemPedido itemPedido2 = new ItemPedido(pedido1,p3,0.00,2,80.00);
+        ItemPedido itemPedido3 = new ItemPedido(pedido2,p2,100.00,1,800.00);
+
+        pedido1.getItens().addAll(Arrays.asList(itemPedido1,itemPedido2));
+        pedido2.getItens().addAll(Arrays.asList(itemPedido3));
+
+        p1.getItens().addAll(Arrays.asList(itemPedido1));
+        p2.getItens().addAll(Arrays.asList(itemPedido3));
+        p3.getItens().addAll(Arrays.asList(itemPedido2));
+
         categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
         produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 
@@ -104,5 +117,7 @@ public class Mc1Application implements CommandLineRunner {
 
         pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
         pagamentoRepository.saveAll(Arrays.asList(pagamento1,pagamento2));
+
+        itemPedidoRespository.saveAll(Arrays.asList(itemPedido1,itemPedido2,itemPedido3));
     }
 }
