@@ -3,6 +3,7 @@ package com.evertonnrb.mc1.resources;
 import com.evertonnrb.mc1.domain.Cliente;
 import com.evertonnrb.mc1.domain.dto.CategoriaDTO;
 import com.evertonnrb.mc1.domain.dto.ClienteDTO;
+import com.evertonnrb.mc1.domain.dto.ClienteNewDTO;
 import com.evertonnrb.mc1.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class ClienteResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
         Cliente obj = service.fromCategoriaDto(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder
