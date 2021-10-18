@@ -1,11 +1,16 @@
     package com.evertonnrb.mc1.domain.dto;
 
 import com.evertonnrb.mc1.domain.Categoria;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoriaDTO implements Serializable {
     private Integer id;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min = 5, max = 80, message = "O campo dever ter entre 5 e 80 caracteres")
     private String nome;
 
     public CategoriaDTO() {

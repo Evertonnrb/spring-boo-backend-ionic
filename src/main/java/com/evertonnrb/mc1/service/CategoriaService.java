@@ -1,6 +1,7 @@
 package com.evertonnrb.mc1.service;
 
 import com.evertonnrb.mc1.domain.Categoria;
+import com.evertonnrb.mc1.domain.dto.CategoriaDTO;
 import com.evertonnrb.mc1.repositories.CategoriaRepository;
 import com.evertonnrb.mc1.service.exceptions.DataIntegrityException;
 import com.evertonnrb.mc1.service.exceptions.ObjectNotFoundException;
@@ -52,8 +53,12 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public Page<Categoria> findByPage(Integer page,Integer linesPerPage, String orderBy,String direction){
-        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
+    public Page<Categoria> findByPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repository.findAll(pageRequest);
+    }
+
+    public Categoria fromCategoriaDto(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
     }
 }
