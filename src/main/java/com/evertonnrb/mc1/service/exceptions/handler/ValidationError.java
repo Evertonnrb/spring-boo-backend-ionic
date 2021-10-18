@@ -1,4 +1,4 @@
-package com.evertonnrb.mc1.service.handler;
+package com.evertonnrb.mc1.service.exceptions.handler;
 
 import java.util.ArrayList;
 import java.util.List;

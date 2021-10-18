@@ -1,8 +1,7 @@
-package com.evertonnrb.mc1.service.handler;
+package com.evertonnrb.mc1.service.exceptions.handler;
 
 import com.evertonnrb.mc1.service.exceptions.DataIntegrityException;
 import com.evertonnrb.mc1.service.exceptions.ObjectNotFoundException;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

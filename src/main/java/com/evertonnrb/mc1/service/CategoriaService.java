@@ -53,8 +53,8 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public Page<Categoria> findByPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+    public Page<Categoria> findByPage(Integer page,Integer linesPerPage, String orderBy,String direction){
+        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
         return repository.findAll(pageRequest);
     }
 
