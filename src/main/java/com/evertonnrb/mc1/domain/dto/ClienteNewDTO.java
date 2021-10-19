@@ -1,21 +1,50 @@
 package com.evertonnrb.mc1.domain.dto;
 
+import com.evertonnrb.mc1.service.validation.ClienteInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
+    @NotEmpty(message = "Campo obrigatório")
+    @Length(min = 3, max = 120, message = "Campo obrigatório")
     private String nome;
+
+    @NotEmpty(message = "Campo obrigatório")
+    @Email(message = "Verifique o email informado")
     private String email;
+
+    @NotEmpty(message = "Campo obrigatório")
     private String cpfOuCnpj;
+
+    @NotNull(message = "Campo obrigatório")
     private Integer tipo;
 
-    private String logradouro;
+    @NotEmpty(message = "Campo obrigatório")
+    @Length(min = 1, max = 120, message = "Campo obrigatório")
+    private String lagradouro;
+
+    @NotEmpty(message = "Campo obrigatório")
+    @Length(min = 1, max = 9, message = "Campo obrigatório")
     private String numero;
+
     private String complemento;
+
+    @NotEmpty(message = "Campo obrigatório")
+    @Length(min = 1, max = 120, message = "Campo obrigatório")
     private String bairro;
+
+    @NotEmpty(message = "Campo obrigatório")
     private String cep;
 
+    @NotEmpty(message = "Campo obrigatório")
     private String telefone1;
+
     private String telefone2;
     private String telefone3;
 
@@ -56,12 +85,12 @@ public class ClienteNewDTO implements Serializable {
         this.tipo = tipo;
     }
 
-    public String getLogradouro() {
-        return logradouro;
+    public String getLagradouro() {
+        return lagradouro;
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+    public void setLagradouro(String lagradouro) {
+        this.lagradouro = lagradouro;
     }
 
     public String getNumero() {
