@@ -54,13 +54,22 @@ public class Mc1Application implements CommandLineRunner {
         Produto p1 = new Produto(null,"Computador",2000.00);
         Produto p2 = new Produto(null,"Impressora",1800.00);
         Produto p3 = new Produto(null,"Mouse",80.00);
+        Produto p4 = new Produto(null,"Mesa de escritorio",580.00);
+        Produto p5 = new Produto(null,"Toalha",80.00);
+        Produto p6 = new Produto(null,"TV 30 polegadas",2800.00);
 
-        cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+        cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3,p4));
         cat2.getProdutos().addAll(Arrays.asList(p2));
+        cat3.getProdutos().addAll(Arrays.asList(p4,p5));
+        cat4.getProdutos().addAll(Arrays.asList(p6));
+
 
         p1.getCategorias().addAll(Arrays.asList(cat1));
         p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
         p3.getCategorias().addAll(Arrays.asList(cat1,cat1));
+        p4.getCategorias().addAll(Arrays.asList(cat1));
+        p5.getCategorias().addAll(Arrays.asList(cat3));
+        p6.getCategorias().addAll(Arrays.asList(cat4));
 
         Estado rj = new Estado(null,"Rio de Janeiro");
         Estado sp = new Estado(null,"São Paulo");
@@ -113,7 +122,7 @@ public class Mc1Application implements CommandLineRunner {
         p3.getItens().addAll(Arrays.asList(itemPedido2));
 
         categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7,cat8,cat9,cat10));
-        produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
+        produtoRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6));
 
         estadoRepository.saveAll(Arrays.asList(rj,sp,ms));
         cidadeRepository.saveAll(Arrays.asList(cg,dr,tlg,spo,mc,rio));
