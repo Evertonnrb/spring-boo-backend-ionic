@@ -1,10 +1,12 @@
 package com.evertonnrb.mc1.domain;
 
 import com.evertonnrb.mc1.domain.enuns.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
 
     private Integer numeroDeParcelas;
